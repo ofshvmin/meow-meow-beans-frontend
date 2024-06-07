@@ -52,7 +52,14 @@ function App(): JSX.Element {
   }
 
   const handleVote = async (formData: VoteManagerFormData): Promise<void> => {
-    voteService.castVote(formData)
+    try {
+      const updatedProfile = await voteService.castVote(formData)
+      setProfiles(profiles.map(profile => (
+        profile.id === updatedProfile.id ? updatedProfile : profile
+      )))
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (

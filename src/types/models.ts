@@ -1,6 +1,13 @@
-/* ---------===== custom props ====--------- */
+/* ---------===== custom models ====--------- */
 
-
+export interface Vote {
+    id: number;
+    value: number; 
+    profileId: number; 
+    voterId: number;
+    createdAt: string;
+    updatedAt: string;
+}
 
 /* ---------===== auth models =====--------- */
 
@@ -10,6 +17,7 @@ export interface Profile {
   id: number;
   createdAt: string;
   updatedAt: string;
+  votesReceived: Vote[];
 }
 
 export interface User {

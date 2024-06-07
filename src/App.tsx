@@ -15,12 +15,14 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 // services
 import * as authService from './services/authService'
 import * as profileService from './services/profileService'
+import * as voteService from './services/voteService'
 
 // styles
 import './App.css'
 
 // types
 import { User, Profile } from './types/models'
+import { VoteManagerFormData } from './types/forms'
 
 function App(): JSX.Element {
   const [user, setUser] = useState<User | null>(authService.getUser())
@@ -49,6 +51,10 @@ function App(): JSX.Element {
     setUser(authService.getUser())
   }
 
+  const handleVote = async (formData: VoteManagerFormData): Promise<void> => {
+    voteService.castVote(formData)
+  }
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
@@ -60,6 +66,7 @@ function App(): JSX.Element {
             <ProtectedRoute user={user}>
               <Profiles 
                 profiles={profiles}
+                handleVote={handleVote}
               />
             </ProtectedRoute>
           }

@@ -6,13 +6,15 @@ import ProfileCard from '../../components/ProfileCard/ProfileCard'
 
 // types
 import { Profile } from '../../types/models'
+import { VoteManagerFormData } from '../../types/forms'
 
 interface ProfilesProps {
   profiles: Profile[];
+  handleVote: (formData: VoteManagerFormData) => Promise<void>;
 }
 
 const Profiles = (props: ProfilesProps): JSX.Element => {
-  const { profiles } = props
+  const { profiles, handleVote } = props
 
   if (!profiles.length) {
     return <main className={styles.container}><h1>Loading...</h1></main>
@@ -24,6 +26,7 @@ const Profiles = (props: ProfilesProps): JSX.Element => {
         <ProfileCard
           key={profile.id}
           profile={profile}
+          handleVote={handleVote}
         />
       ))}
     </main>
